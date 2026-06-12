@@ -1,0 +1,24 @@
+# .github/workflows/ci-snyk.yml
+# ─────────────────────────────────────────────────────────────────────────────
+# Universal caller workflow – works for ANY language team
+# Just drop this file into your repo under .github/workflows/
+# No changes needed regardless of language (Node, Python, Java, Go, Ruby...)
+# ─────────────────────────────────────────────────────────────────────────────
+
+name: CI – Snyk Security Scan
+
+on:
+  push:
+    branches: [main, develop]
+  pull_request:
+    branches: [main, develop]
+
+jobs:
+  security-scan:
+    name: Security – Snyk SAST
+    uses: CD20012001/snyk-security-workflows/.github/workflows/snyk-sast-reusable.yml@main
+    with:
+      severity-filter: "critical,high"
+      fail-on-exploit: true
+    secrets:
+      SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
