@@ -12,7 +12,5 @@ jobs:
     uses: CD20012001/snyk-security-workflows/.github/workflows/snyk-filter.yml@main
     with:
       install-command: "pip install -r requirements.txt"
-      severity-filter: "critical,high"
-      fail-on-exploit: true
     secrets:
       SNYK_TOKEN: ${{ secrets.SNYK_TOKEN }}
